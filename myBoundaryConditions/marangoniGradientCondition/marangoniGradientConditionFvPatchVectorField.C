@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     |
-    \\  /    A nd           | Copyright (C) 2011-2016 OpenFOAM Foundation
+    \\  /    A nd           | Copyright (C) 2011-2019 OpenFOAM Foundation
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
 License
@@ -97,7 +97,7 @@ marangoniGradientConditionFvPatchVectorField
     dSigDT_(ptf.dSigDT_),
     rho_(ptf.rho_)
 {
-	refValue() = Zero;
+    refValue() = Zero;
     refGrad() = Zero;
     valueFraction() = symm(sqr(this->patch().nf()));
 }
