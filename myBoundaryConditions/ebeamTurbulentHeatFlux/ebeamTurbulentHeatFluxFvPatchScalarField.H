@@ -42,13 +42,13 @@ Usage
         Property     | Description             | Required    | Default value
         heatSource   | 'circle' or 'ellipse' or 'strip'| yes |
         heatProfile  | 'flat' or 'gaussian | yes | 'flat'
-        Q			 | Heat Absorbed [W] | yes |
-        radius		 | radius of circular beam [m] (sigma in case of gaussian) | yes |
+        Q	     | Heat Absorbed [W] | yes |
+        radius       | radius of circular beam [m] (sigma in case of gaussian) | yes |
         semiMajorAxis| SemiMajorAxis X-direction of ellipse beam [m] (sigmaX in case of gaussian) | yes |
         semiMinorAxis| SemiMinorAxis Z-direction of ellipse beam [m] (sigmaY in case of gaussian) | yes |
-        length		 | length X-direction of strip beam [m] | yes |
+        length	     | length X-direction of strip beam [m] | yes |
         sigmaX       | sigmaX in X-direction of strip [m] | no | 1e-9
-        breadth		 | breadth Z-direction of strip beam [m] | yes |
+        breadth	     | breadth Z-direction of strip beam [m] | yes |
         sigmaZ       | sigmaX in Z-direction of strip [m] | no | 1e-9
         Qr           | name of the radiative flux field | no | none
         value        | initial temperature value | no | calculated
