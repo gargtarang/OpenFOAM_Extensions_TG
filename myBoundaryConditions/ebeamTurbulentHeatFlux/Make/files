@@ -1,0 +1,2 @@
+ebeamTurbulentHeatFluxFvPatchScalarField.C
+LIB = $(FOAM_USER_LIBBIN)/libeBeamConditionNew_Test
