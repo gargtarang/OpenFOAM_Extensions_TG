@@ -63,6 +63,8 @@ Usage
         massNumber   | mass number of evaporated material | 1
         vapourisationEnthalpy | enthalpy of vaporisation[J/kg] |0
         units        | units of pressure in above equation |Pa
+        emissivity   | emissivity for radtion heat exchange | 0
+        Tambient     | Fixed ambient temperature for radiation heat exchange | 0
     \endtable
 
     Note: If needed, both 'value' and 'gradient' must be defined to be used.
@@ -115,6 +117,8 @@ Usage
         vapourisationEnthalpy   1.15e7;
         units           mmHg;
         value           uniform 298;
+        emissivity      0.6;
+        Tambient        300;
     }
 
     \endverbatim
