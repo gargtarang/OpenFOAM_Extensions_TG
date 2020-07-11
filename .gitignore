@@ -25,3 +25,8 @@ myFunctionObjects/myFunctionObjects.files
 myFunctionObjects/myFunctionObjects.includes
 mySolvers/
 myfvOptions/
+*.files
+*.config
+*.includes
+*.creator
+*.creator.user
