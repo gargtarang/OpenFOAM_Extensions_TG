@@ -1,4 +1,7 @@
 # OpenFOAM_Extensions_TG
+
+Experimental branch for modified turbulence model implementation
+
 Extensions used by me in OpenFOAM. I use OpenFOAM foundation version.
 
 All the extensions given below are working with OpenFOAM-6. Although I have not
@@ -17,4 +20,5 @@ External Libraries to be imported in controlDict file:
 2. marangoniCondition --> "libmarangoniGradientCondition.so"
 3. All Function Objects --> "libmyFunctionObjects.so"
 4. kEpsilonMelting Turbulence Model --> "libmyTurbulenceModels.so"
+
 
