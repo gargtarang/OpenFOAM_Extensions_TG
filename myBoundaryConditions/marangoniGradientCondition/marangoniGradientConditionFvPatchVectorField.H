@@ -21,6 +21,10 @@ License
     You should have received a copy of the GNU General Public License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
+Author
+    Tarang Garg
+    gargtarang@gmail.com
+
 Class
     Foam::marangoniGradientConditionFvPatchVectorField
 
