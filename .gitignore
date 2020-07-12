@@ -30,3 +30,7 @@ myfvOptions/
 *.includes
 *.creator
 *.creator.user
+*.pdf
+*.zip
+*/lnInclude
+*/linux*
