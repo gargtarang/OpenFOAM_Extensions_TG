@@ -27,104 +27,29 @@ License
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-makeBaseTurbulenceModel
-(
-    geometricOneField,
-    geometricOneField,
-    incompressibleTurbulenceModel,
-    IncompressibleTurbulenceModel,
-    transportModel
-);
-
 
 // -------------------------------------------------------------------------- //
 // Laminar models
 // -------------------------------------------------------------------------- //
 
-#include "Stokes.H"
-makeLaminarModel(Stokes);
-
-#include "Maxwell.H"
-makeLaminarModel(Maxwell);
+//#include "Stokes.H"
+//makeLaminarModel(Stokes);
 
 
 // -------------------------------------------------------------------------- //
 // RAS models
 // -------------------------------------------------------------------------- //
 
-#include "SpalartAllmaras.H"
-makeRASModel(SpalartAllmaras);
-
-#include "kEpsilon.H"
-makeRASModel(kEpsilon);
-
 #include "kEpsilonMelting.H"
 makeRASModel(kEpsilonMelting);
-
-#include "RNGkEpsilon.H"
-makeRASModel(RNGkEpsilon);
-
-#include "realizableKE.H"
-makeRASModel(realizableKE);
-
-#include "LaunderSharmaKE.H"
-makeRASModel(LaunderSharmaKE);
-
-#include "kOmega.H"
-makeRASModel(kOmega);
-
-#include "kOmegaSST.H"
-makeRASModel(kOmegaSST);
-
-#include "kOmegaSSTSAS.H"
-makeRASModel(kOmegaSSTSAS);
-
-#include "kOmegaSSTLM.H"
-makeRASModel(kOmegaSSTLM);
-
-#include "v2f.H"
-makeRASModel(v2f);
-
-#include "LRR.H"
-makeRASModel(LRR);
-
-#include "SSG.H"
-makeRASModel(SSG);
 
 
 // -------------------------------------------------------------------------- //
 // LES models
 // -------------------------------------------------------------------------- //
 
-#include "Smagorinsky.H"
-makeLESModel(Smagorinsky);
-
-#include "WALE.H"
-makeLESModel(WALE);
-
-#include "kEqn.H"
-makeLESModel(kEqn);
-
-#include "dynamicKEqn.H"
-makeLESModel(dynamicKEqn);
-
-#include "dynamicLagrangian.H"
-makeLESModel(dynamicLagrangian);
-
-#include "kOmegaSSTDES.H"
-makeLESModel(kOmegaSSTDES);
-
-#include "SpalartAllmarasDES.H"
-makeLESModel(SpalartAllmarasDES);
-
-#include "SpalartAllmarasDDES.H"
-makeLESModel(SpalartAllmarasDDES);
-
-#include "SpalartAllmarasIDDES.H"
-makeLESModel(SpalartAllmarasIDDES);
-
-#include "DeardorffDiffStress.H"
-makeLESModel(DeardorffDiffStress);
+//#include "Smagorinsky.H"
+//makeLESModel(Smagorinsky);
 
 
 // ************************************************************************* //
