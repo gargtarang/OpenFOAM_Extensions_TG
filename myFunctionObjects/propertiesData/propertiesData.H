@@ -21,6 +21,10 @@ License
     You should have received a copy of the GNU General Public License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
+Author
+    Tarang Garg
+    gargtarang@gmail.com
+
 Class
     Foam::functionObjects::propertiesData
 
@@ -28,14 +32,15 @@ Group
     grpFieldFunctionObjects
 
 Description
-    This function object stores turbulence fields on the mesh database for
-    further manipulation.
+    This function object stores and writes thermophysical data.
+    This functionObject is functional but some code cleanup is 
+    required. Use with care.
 
     Fields are stored as copies of the original, with the prefix
-    "tubulenceModel:", e.g.:
+    <functionObjectName>_, e.g.:
 
     \verbatim
-    turbulenceModel:R
+    propertiesData1_Cp
     \endverbatim
 
     Example of function object specification:
@@ -47,8 +52,8 @@ Description
         ...
         fields
         (
-            R
-            devRhoReff
+            Cp
+            Mu
         );
     }
     \endverbatim
@@ -62,18 +67,10 @@ Usage
 
     Where \c fields can include:
     \plaintable
-        k           | turbulence kinetic energy
-        epsilon     | turbulence kinetic energy dissipation rate
-        omega       | turbulence specific dissipation rate
-        nut         | turbulence viscosity (incompressible)
-        nuEff       | effective turbulence viscosity (incompressible)
-        mut         | turbulence viscosity (compressible)
-        muEff       | effective turbulence viscosity (compressible)
-        alphat      | turbulence thermal diffusivity (compressible)
-        alphaEff    | effective turbulence thermal diffusivity (compressible)
-        R           | Reynolds stress tensor
-        devReff     | Deviatoric part of the effective Reynolds stress
-        devRhoReff  | Divergence of the Reynolds stress
+        Cp          | Constant pressure heat capacity
+        kappa       | Thermal Conductivity
+        mu          | Dynamic Viscosity
+        alpha       | Thermal Diffusivity
     \endplaintable
 
 See also

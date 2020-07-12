@@ -21,6 +21,10 @@ License
     You should have received a copy of the GNU General Public License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
+Author
+    Tarang Garg
+    gargtarang@gmail.com
+
 Class
     Foam::functionObjects::myWallHeatFlux
 
@@ -33,6 +37,11 @@ Description
 
     All wall patches are included by default; to restrict the calculation to
     certain patches, use the optional 'patches' entry.
+
+    At the end it also returns sum of power at all patches in the log file. 
+    This was needed for my application as I wanted to keep a track on net heat
+    of the system. For my system I generally check convergence when net heat 
+    comes near to zero.
 
     Example of function object specification:
     \verbatim

@@ -16,17 +16,17 @@ FoamFile
 
 functions
 {
-    turbulenceFields1
+    propertiesData1
     {
-        type            turbulenceFields;
-        libs ("libfieldFunctionObjects.so");
+        type            propertiesData;
+        libs ("libmyFunctionObjects.so");
         enabled         true;
         writeControl   timeStep;
         writeInterval  1;
 
         fields
         (
-            R
+            mu
         );
     }
 }

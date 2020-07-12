@@ -81,7 +81,7 @@ bool Foam::functionObjects::propertiesData::compressible()
     else
     {
         FatalErrorInFunction
-            << "Turbulence model not found in database, deactivating"
+            << "Thermo model not found in database, deactivating"
             << exit(FatalError);
     }
 
