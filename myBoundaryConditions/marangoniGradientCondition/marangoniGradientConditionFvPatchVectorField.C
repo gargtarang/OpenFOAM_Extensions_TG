@@ -239,26 +239,25 @@ void Foam::marangoniGradientConditionFvPatchVectorField::getValues()
     );
     if(!db().foundObject<scalarField>("T"))
     {
-        Info<< "This is a thermophysical condition. Use temperature condition also" << endl;
+        Info<< "This is a thermophysical condition."
+            << "Use temperature condition also" << nl;
         refGrad() = Zero;
         refValue() = Zero;
         valueFraction() = Zero;
         return;
     }
 
-    const vectorField& tGrad = 
-        patch().lookupPatchField<volVectorField,vector>("gradT");
+    const volScalarField& T = this->internalField().mesh().lookupObject<volScalarField>("T");
+    const tmp<volVectorField> tgradT(fvc::grad(T.oldTime()));
+    const vectorField& tGrad = tgradT().boundaryField()[this->patch().index()];
     vectorField nHat (this->patch().nf());
     vectorField tGradPlane(transform(I-sqr(nHat),tGrad));
- //   Info<<"tgrad= "<<tGradPlane<<nl;
     scalarField nuEff(turbModel.nuEff(patch().index()));
- //   Info<<"nuEff= "<<nuEff<<nl;
     vectorField tau1 ((dSigDT_/(rho_*nuEff))*tGradPlane);
+
     refGrad() = tau1;
     refValue() = Zero;
     valueFraction() = symm(sqr(nHat));
-    
- //   Info<<refGrad()<<nl<<valueFraction()<<nl;
 }
 
 
