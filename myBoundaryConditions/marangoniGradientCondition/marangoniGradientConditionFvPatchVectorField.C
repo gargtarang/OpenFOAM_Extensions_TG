@@ -30,6 +30,7 @@ License
 #include "surfaceFields.H"
 #include "turbulenceModel.H"
 #include "symmTransformField.H"
+#include "fvcGrad.H"
 
 // * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
 
@@ -236,9 +237,9 @@ void Foam::marangoniGradientConditionFvPatchVectorField::getValues()
             internalField().group()
         )
     );
-    if(!db().foundObject<vectorField>("gradT"))
+    if(!db().foundObject<scalarField>("T"))
     {
-        Info<< "gradT not found, returning" << endl;
+        Info<< "This is a thermophysical condition. Use temperature condition also" << endl;
         refGrad() = Zero;
         refValue() = Zero;
         valueFraction() = Zero;
