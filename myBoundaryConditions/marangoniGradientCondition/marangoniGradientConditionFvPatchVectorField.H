@@ -29,12 +29,17 @@ Group
 
 Description
     Set a marangoni condition as nuEff dU/dn = (dSigDT/rho) dT/ds.
+    For incompressible solvers direct value of density has to be given by
+    specifying rho. For compressible solvers name of rho variable can be
+    given as rhoName.
+    Presence of rhoName variable will disregard the value of rho given
 
 Usage
     \table
-        Property	| Description		| Required	| Default Value
-        dSigDT		| temperature coefficient of Surface Tension | yes | 0.0
-        rho			| density of the fluid (constant)	| yes | 1.0
+        Property  | Description		| Required	| Default Value
+        dSigDT    | Temperature coefficient of Surface Tension | yes | 0.0
+        rhoName	  | Name of the density variable in the fluid	| no | none
+        rho       | Value of density for incompressible flow |no | 1.0
     \endtable
 
 Example usage:
@@ -44,6 +49,7 @@ Example usage:
         type    marangoniCondition;
         dSigDT  -1.0e-4;
         rho     1000;
+        rhoName rho;
     }
     \endverbatim
 
@@ -79,8 +85,11 @@ class marangoniGradientConditionFvPatchVectorField
         //- Constant temperature coefficient of Surface Tension
         const scalar dSigDT_;
         
-        //- Constant Density of fluid
-        const scalar rho_;
+        //- Density of fluid
+        scalar rhoValue_;
+
+        //- Name of the density field
+        word rhoName_;
 
 
 public:

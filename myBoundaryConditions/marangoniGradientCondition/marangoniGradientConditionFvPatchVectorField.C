@@ -43,7 +43,8 @@ marangoniGradientConditionFvPatchVectorField
 :
     directionMixedFvPatchVectorField(p, iF),
 	dSigDT_(Zero),
-	rho_(1.0)
+    rhoValue_(1.0),
+    rhoName_("rho")
 {
     refValue() = Zero;
     refGrad() = Zero;
@@ -60,8 +61,9 @@ marangoniGradientConditionFvPatchVectorField
 )
 :
     directionMixedFvPatchVectorField(p, iF),
-    dSigDT_(readScalar(dict.lookup("dSigDT"))),
-    rho_(readScalar(dict.lookup("rho")))
+    dSigDT_(dict.lookupOrDefault<scalar>("dSigDT",0.0)),
+    rhoValue_(dict.lookupOrDefault<scalar>("rho",-1)),
+    rhoName_(dict.lookupOrDefault<word>("rhoName","none"))
 {
     fvPatchField<vector>::operator=(patchInternalField());
     refValue() = Zero;
@@ -80,7 +82,8 @@ marangoniGradientConditionFvPatchVectorField
 :
     directionMixedFvPatchVectorField(ptf, p, iF, mapper),
     dSigDT_(ptf.dSigDT_),
-    rho_(ptf.rho_)
+    rhoValue_(ptf.rhoValue_),
+    rhoName_(ptf.rhoName_)
 {
 	refValue() = Zero;
     refGrad() = Zero;
@@ -96,7 +99,8 @@ marangoniGradientConditionFvPatchVectorField
 :
     directionMixedFvPatchVectorField(ptf),
     dSigDT_(ptf.dSigDT_),
-    rho_(ptf.rho_)
+    rhoValue_(ptf.rhoValue_),
+    rhoName_(ptf.rhoName_)
 {
     refValue() = Zero;
     refGrad() = Zero;
@@ -113,7 +117,8 @@ marangoniGradientConditionFvPatchVectorField
 :
     directionMixedFvPatchVectorField(ptf, iF),
     dSigDT_(ptf.dSigDT_),
-    rho_(ptf.rho_)
+    rhoValue_(ptf.rhoValue_),
+    rhoName_(ptf.rhoName_)
 {
 	refValue() = Zero;
     refGrad() = Zero;
@@ -223,12 +228,18 @@ write(Ostream& os) const
 {
     directionMixedFvPatchVectorField::write(os);
     os.writeKeyword("dSigDT") << dSigDT_ << token::END_STATEMENT << nl;
-    os.writeKeyword("rho") << rho_ << token::END_STATEMENT << nl;
+
+    //- No need to write both rhoName and value
+    if(rhoName_!="none")
+        os.writeKeyword("rhoName") << rhoName_ <<token::END_STATEMENT << nl;
+    if(rhoValue_!=-1)
+        os.writeKeyword("rho") << rhoValue_ << token::END_STATEMENT << nl;
 }
 
 
 void Foam::marangoniGradientConditionFvPatchVectorField::getValues()
 {
+
 	const turbulenceModel& turbModel = db().lookupObject<turbulenceModel>
     (
         IOobject::groupName
@@ -239,7 +250,7 @@ void Foam::marangoniGradientConditionFvPatchVectorField::getValues()
     );
     if(!db().foundObject<scalarField>("T"))
     {
-        Info<< "This is a thermophysical condition."
+        Info<< "This is a thermophysical condition. "
             << "Use temperature condition also" << nl;
         refGrad() = Zero;
         refValue() = Zero;
@@ -253,7 +264,28 @@ void Foam::marangoniGradientConditionFvPatchVectorField::getValues()
     vectorField nHat (this->patch().nf());
     vectorField tGradPlane(transform(I-sqr(nHat),tGrad));
     scalarField nuEff(turbModel.nuEff(patch().index()));
-    vectorField tau1 ((dSigDT_/(rho_*nuEff))*tGradPlane);
+    vectorField tau1;
+    if(db().foundObject<volScalarField>(rhoName_))
+    {
+            const scalarField& rhop = this->patch().lookupPatchField<volScalarField,scalar>(rhoName_);
+            tau1 = (dSigDT_/(rhop*nuEff))*tGradPlane;
+            rhoValue_=-1;
+    }
+
+    else
+    {
+        rhoName_="none";
+        if(rhoValue_<0)
+            FatalErrorInFunction
+                << "Did not find registered density field " << rhoName_
+                << " or no constant density 'rho' specified"
+                << exit(FatalError);
+        else
+        {
+            tau1 = (dSigDT_/(rhoValue_*nuEff))*tGradPlane;
+        }
+    }
+
 
     refGrad() = tau1;
     refValue() = Zero;
