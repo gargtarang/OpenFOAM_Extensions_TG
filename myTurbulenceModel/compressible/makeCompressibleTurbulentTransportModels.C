@@ -27,17 +27,15 @@ License
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-/*
-makeBaseTurbulenceModel
-(
-    geometricOneField,
-    volScalarField,
-    compressibleTurbulenceModel,
-    CompressibleTurbulenceModel,
-    ThermalDiffusivity,
-    fluidThermo
-);
-*/
+
+// -------------------------------------------------------------------------- //
+// Laminar models
+// -------------------------------------------------------------------------- //
+
+//#include "Stokes.H"
+//makeLaminarModel(Stokes);
+
+
 // -------------------------------------------------------------------------- //
 // RAS models
 // -------------------------------------------------------------------------- //
